@@ -1,7 +1,7 @@
 resource "azurerm_kubernetes_cluster" "clusteraks" {
   name                = "clusteraks01_${var.environment}"
-  location            = var.resource_group_name
-  resource_group_name = var.location
+  location            = var.location
+  resource_group_name = var.resource_group_name
   dns_prefix          = "exampleaks1"
 
   default_node_pool {
