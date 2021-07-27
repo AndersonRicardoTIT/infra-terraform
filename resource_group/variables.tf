@@ -8,9 +8,3 @@ variable "location" {
   type = string
 }
 
-variable "environment" {
-  description = "localizacao do resource group"
-  type = string
-}
-
-
