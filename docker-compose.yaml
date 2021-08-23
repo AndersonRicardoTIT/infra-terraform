@@ -1,0 +1,58 @@
+version: '3.9'
+
+volumes:
+  sql_data:
+  sql_log:
+  sql_secrets:
+    
+networks: 
+  contas-network:
+    name: contas-network
+  
+services:
+  db:
+    container_name: usadosbr-contas-db
+    volumes:
+      - sql_data:/var/opt/mssql/data
+      - sql_log:/var/opt/mssql/log
+      - sql_secrets:/var/opt/mssql/secrets
+    networks:
+      - contas-network
+    build:
+      dockerfile: docker/mssql/Dockerfile
+      context: .
+    environment:
+      - ACCEPT_EULA=Y
+      - SA_PASSWORD=${DB_PASSWORD}
+    ports:
+      - 1433:1433
+    restart: always
+    
+  migrations:
+    container_name: usadosbr-contas-migrations
+    networks:
+      - contas-network
+    build:
+      dockerfile: src/Usadosbr.Contas.Migrations/Dockerfile
+      context: .
+    environment:
+      ASPNETCORE_ENVIRONMENT: ${ENVIRONMENT}
+    depends_on:
+      - db
+    restart: on-failure
+    
+  api:
+    container_name: usadosbr-contas-api
+    networks:
+      - contas-network
+    build:
+      dockerfile: src/Usadosbr.Contas.WebApi/Dockerfile
+      context: .
+    environment:
+      ASPNETCORE_ENVIRONMENT: ${ENVIRONMENT}
+    ports:
+      - 8080:80
+      - 8081:443
+    depends_on:
+      - migrations
+    restart: always
