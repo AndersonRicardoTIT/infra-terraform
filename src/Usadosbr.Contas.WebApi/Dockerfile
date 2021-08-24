@@ -17,7 +17,7 @@ COPY ./*.sln ./
 COPY src/*/*.csproj ./
 RUN for file in $(ls *.csproj); do mkdir -p src/${file%.*} && mv $file src/${file%.*}; done
 
-RUN dotnet restore ${SOLUTION_NAME}
+RUN dotnet restore $SOLUTION_NAME
 
 COPY . . 
 
