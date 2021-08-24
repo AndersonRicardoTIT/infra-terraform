@@ -1,9 +1,9 @@
-﻿FROM mcr.microsoft.com/dotnet/sdk:6.0 AS base
+FROM mcr.microsoft.com/dotnet/sdk:6.0 AS base
 
 RUN curl -o /usr/local/share/ca-certificates/verisign.crt -SsL https://crt.sh/?d=1039083 && update-ca-certificates
 
-ARG CONFIGURATION="Release"
-ARG SOLUTION_NAME="Usadosbr.Contas.sln"
+ARG CONFIGURATION="main"
+ARG SOLUTION_NAME="Usadosbr.Contas.Tests"
 
 ENV CONFIGURATION=$CONFIGURATION
 ENV SOLUTION_NAME=$SOLUTION_NAME
