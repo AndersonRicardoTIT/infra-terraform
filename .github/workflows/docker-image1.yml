@@ -30,5 +30,5 @@ jobs:
       uses: actions/checkout@v2
 
     - run: |
-        docker build . --file src/Usadosbr.Contas.WebApi/Dockerfile -t ${{ secrets.REGISTRY_LOGIN_SERVER }}/Contas.WebApi:v1
-        docker push ${{ secrets.REGISTRY_LOGIN_SERVER }}/Contas.WebApi:v1
+        docker build . --file src/Usadosbr.Contas.WebApi/Dockerfile -t ${{ secrets.REGISTRY_LOGIN_SERVER }}/contas.webapi:v1
+        docker push ${{ secrets.REGISTRY_LOGIN_SERVER }}/contas.webapi:v1
