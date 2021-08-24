@@ -1,0 +1,34 @@
+name: Docker Image CI - Contas.WebApi
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+
+    - name: 'Login via Azure CLI'
+      uses: azure/login@v1
+      with:
+        creds: ${{ secrets.AZURE_CREDENTIALS }}
+        
+    - name: Login to ACR
+      uses: docker/login-action@v1
+      with:
+        registry: ${{ secrets.REGISTRY_LOGIN_SERVER }}
+        username: ${{ secrets.REGISTRY_USERNAME }}
+        password: ${{ secrets.REGISTRY_PASSWORD }}
+
+    - name: 'Build and push image'
+      uses: actions/checkout@v2
+
+    - run: |
+        docker build . --file src/Usadosbr.Contas.WebApi/Dockerfile -t ${{ secrets.REGISTRY_LOGIN_SERVER }}/contas.webapi:v1
+        docker push ${{ secrets.REGISTRY_LOGIN_SERVER }}/contas.webapi:v1
