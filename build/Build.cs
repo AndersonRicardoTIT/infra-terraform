@@ -64,7 +64,7 @@ class Build : NukeBuild
                 .EnableNoRestore());
         });
 
-    Target UnitTest => _ => _.DependsOn(Compile)
+    /*Target UnitTest => _ => _.DependsOn(Compile)
         .Executes(() =>
         {
             DotNetTest(s => s
@@ -84,5 +84,5 @@ class Build : NukeBuild
                 .EnableNoRestore()
                 .EnableNoBuild()
             );
-        });
+        });*/
 }
