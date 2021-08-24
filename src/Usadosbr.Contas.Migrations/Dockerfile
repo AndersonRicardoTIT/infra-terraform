@@ -1,4 +1,4 @@
-﻿FROM mcr.microsoft.com/dotnet/sdk:6.0 AS base
+FROM mcr.microsoft.com/dotnet/sdk:6.0 AS base
 
 ARG CONFIGURATION="Release"
 
@@ -19,6 +19,8 @@ COPY src/Usadosbr.Contas.WebApi/ Usadosbr.Contas.WebApi/
 COPY src/Usadosbr.Contas.Migrations/Usadosbr.Contas.Migrations.csproj Usadosbr.Contas.Migrations/
 COPY src/Usadosbr.Contas.Migrations/ Usadosbr.Contas.Migrations/
 
+COPY src/Usadosbr.Contas.WebApi/appsettings.json Usadosbr.Contas.Migrations/
+
 RUN dotnet restore Usadosbr.Contas.Migrations/
 
 FROM restore as build
@@ -26,7 +28,10 @@ FROM restore as build
 WORKDIR Usadosbr.Contas.Migrations
 
 RUN dotnet build Usadosbr.Contas.Migrations.csproj -c ${CONFIGURATION}
-RUN dotnet publish Usadosbr.Contas.Migrations.csproj --configuration ${CONFIGURATION} --no-build -o /app/tools
+
+RUN dotnet publish Usadosbr.Contas.Migrations.csproj --configuration ${CONFIGURATION} --no-build -o /app/tools/
+
+COPY src/Usadosbr.Contas.WebApi/appsettings.json  /app/tools
 
 FROM mcr.microsoft.com/dotnet/runtime:6.0 AS final
 
