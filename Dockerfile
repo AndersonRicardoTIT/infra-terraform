@@ -1,8 +1,9 @@
-FROM gradle:jre11
+FROM ubuntu:latest
 
 USER root
 
-RUN mkdir /api && apt-get update && apt-get install vim telnet wget -y
+COPY .nuke/temp ~/.nuget/packages
 
-WORKDIR /API
+RUN ./build.cmd UnitTest IntegrationTest
+
 ENV TZ=America/Sao_Paulo
