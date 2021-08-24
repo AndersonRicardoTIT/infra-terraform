@@ -63,26 +63,4 @@ class Build : NukeBuild
                 .SetConfiguration(Configuration)
                 .EnableNoRestore());
         });
-
-    /*Target UnitTest => _ => _.DependsOn(Compile)
-        .Executes(() =>
-        {
-            DotNetTest(s => s
-                .SetProjectFile(Solution.tests.Usadosbr_Contas_Tests)
-                .SetConfiguration(Configuration)
-                .EnableNoRestore()
-                .EnableNoBuild()
-            );
-        });
-
-    Target IntegrationTest => _ => _.DependsOn(UnitTest, Compile)
-        .Executes(() =>
-        {
-            DotNetTest(s => s
-                .SetProjectFile(Solution.tests.Usadosbr_Contas_IntegrationTests)
-                .SetConfiguration(Configuration)
-                .EnableNoRestore()
-                .EnableNoBuild()
-            );
-        });*/
 }
