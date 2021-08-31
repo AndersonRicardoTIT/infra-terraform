@@ -38,5 +38,5 @@ jobs:
       uses: actions/checkout@v2
 
     - run: |
-        docker build . --file src/Usadosbr.Contas.Migrations/Dockerfile -t ${{ secrets.REGISTRY_LOGIN_SERVER }}/contas.migrations:v1
-        docker push ${{ secrets.REGISTRY_LOGIN_SERVER }}/contas.migrations:v1
+        docker build . --file src/Usadosbr.Contas.Migrations/Dockerfile -t ${{ secrets.REGISTRY_LOGIN_SERVER }}/contas.migrations/v1:v1
+        docker push ${{ secrets.REGISTRY_LOGIN_SERVER }}/contas.migrations/v1:v1
