@@ -2,9 +2,17 @@ name: Docker Image CI - Contas.Migrations
 
 on:
   push:
+    paths:
+      - 'src/Usadosbr.Contas.Migrations/**'
     branches: [ main ]
+    tags:
+      - v*
   pull_request:
+    paths:
+      - 'src/Usadosbr.Contas.Migrations/**'
     branches: [ main ]
+    tags:
+      - v*
 
 jobs:
 
