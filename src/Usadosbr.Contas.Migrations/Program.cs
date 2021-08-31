@@ -8,6 +8,7 @@ using Serilog;
 using Usadosbr.Contas.Core.Common.Services;
 using Usadosbr.Contas.Core.Persistance;
 
+
 namespace Usadosbr.Contas.Migrations
 {
     public class Program
